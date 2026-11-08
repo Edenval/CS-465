@@ -1,60 +1,54 @@
 # CS 465 Module Two: Travlr Getaways
 
-This project refactors the original seven-page Travlr Getaways HTML website into an Express application using the Model-View-Controller (MVC) pattern and Handlebars (HBS). The original CSS, logos, backgrounds, and photographs are preserved in `public/`.
+This project refactors the original Travlr Getaways website into an Express application using the Model-View-Controller (MVC) architecture and Handlebars (HBS) templates. The original website design, CSS, and images are preserved, while routing and page rendering are handled through Express.
 
-## Run locally
+## Running the Application
 
-You need Node.js and npm installed. In VS Code, open the `travlr` folder, then use its terminal:
+Node.js and npm are required to run the application. Open the `website` folder in VS Code and run:
 
 ```powershell
 npm install
 npm start
 ```
 
-Open **http://localhost:3000/** for the main page and **http://localhost:3000/travel** for the routed HBS travel page. Test all seven menu links, the three reef images, and the logo. Stop the server with Ctrl+C.
+Once the server starts, the website is available at http://localhost:3000/.
 
-To run the automated route and rendering checks:
+The Travel page can also be accessed directly at http://localhost:3000/travel.
+
+To run the automated tests:
 
 ```powershell
 npm test
 ```
 
-## Folders
+## Project Structure
 
-- `app.js`: Registers HBS, the partials directory, MVC routes, and static public assets.
-- `app_server/routes/`: Maps browser URLs to controllers.
-- `app_server/controllers/`: Chooses the page and supplies its data to the view.
-- `app_server/models/trips.js`: Reads the initial trip data.
-- `app_server/views/`: HBS content pages.
-- `app_server/views/layouts/layout.hbs`: Shared document wrapper and stylesheet link.
-- `app_server/views/partials/`: Shared header, footer, and repeated trip markup.
-- `data/trips.json`: The original three reef entries as structured data for rendering.
-- `public/css/` and `public/images/`: The original supplied website assets, not replacements.
+The application separates routing, controllers, data handling, and templates into different files and folders.
 
-All seven pages are rendered by controllers. On the travel page, the controller passes the three original reef entries to Handlebars. The `{{#each trips}}` directive renders a trip partial for each entry. The header and footer partials avoid repeating the same navigation markup across pages.
+- `app.js` - Configures Express, Handlebars, routes, and static files.
+- `app_server/routes/` - Defines routes and connects requests to controllers.
+- `app_server/controllers/` - Handles requests and passes data to the views.
+- `app_server/models/trips.js` - Loads the travel destination data.
+- `app_server/views/` - Contains the Handlebars templates for the website.
+- `app_server/views/layouts/layout.hbs` - Provides the shared HTML layout.
+- `app_server/views/partials/` - Contains reusable header, footer, and trip templates.
+- `data/trips.json` - Stores the information for the three reef destinations.
+- `public/` - Contains the original CSS, images, and other static assets.
 
-The contact form is only a demonstration. Submitting it shows a notice that email is not connected. Booking, database storage, administration, and login will be developed in later modules.
+## MVC and Handlebars Implementation
 
-## Module Two Git branch
+The website uses Express routes to direct requests to the appropriate controllers. Each controller handles the request and renders the corresponding Handlebars view. This separates page logic from the HTML templates and keeps the application organized.
 
-This ZIP contains the **project files**, not your existing `.git` history. To retain your Module One commits, open the local Git project from the prior assignment, create the new branch, and copy the files from this `travlr` folder into it (replacing the corresponding files):
+The Travel page uses data stored in `trips.json` rather than hardcoding each destination into the HTML. The travel controller retrieves the data through the model and passes it to the view. Handlebars uses the `{{#each trips}}` helper to render Gale Reef, Dawson's Reef, and Claire's Reef using a shared trip partial.
 
-```powershell
-git status
-git switch module1
-git switch -c module2
-```
+The header and footer are also stored as partials to avoid repeating the same markup across multiple pages. A shared layout provides the common HTML structure and stylesheet references.
 
-If `module2` already exists, use `git switch module2` instead of the last command. After copying the files, run `npm install`, `npm test`, and `npm start`. When you have verified the website:
+## Website Functionality
 
-```powershell
-git add .
-git commit -m "Module 2 MVC and Handlebars refactor"
-git push -u origin module2
-```
+All seven original pages are rendered through Express and Handlebars. Navigation links point to the updated routes, and requests using the original `.html` URLs redirect to their corresponding MVC routes.
 
-Submit the **ZIP containing the completed `travlr` project** to Brightspace. Do not include `node_modules` in the ZIP. Do not submit this README by itself.
+The website retains its original images, styling, and general layout. The contact form displays a notification when submitted because email functionality has not been implemented. Booking, database storage, and authentication are not included in this version.
 
-## About the supplied design
+## Original Website Assets
 
-The HTML pages, stylesheet and graphics were supplied as an existing Travlr course website. Their markup and assets were retained in the refactor. Original template credit is preserved in the CSS comment. Incorrect old `.html` links were updated to their Express page routes; the older URLs redirect to the MVC pages.
+The original Travlr Getaways HTML pages, CSS, and images were provided as course materials. These assets were retained during the MVC refactor, with the existing template attribution preserved in the stylesheet.
