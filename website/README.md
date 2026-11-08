@@ -4,7 +4,7 @@ This project refactors the original Travlr Getaways website into an Express appl
 
 ## Running the Application
 
-Node.js and npm are required to run the application. Open the `website` folder in VS Code and run:
+Node.js and npm are required to run the application. Open the `project` folder in VS Code and run:
 
 ```powershell
 npm install
